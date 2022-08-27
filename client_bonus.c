@@ -22,7 +22,7 @@ void	send_char(int pid, char c)
 	int	shift;
 	int	i;
 
-	i = 7;
+	i = 8;
 	while (i >= 0)
 	{
 		shift = 1 << (i);
@@ -30,7 +30,7 @@ void	send_char(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(500);
+		usleep(550);
 		i--;
 	}
 }
@@ -51,7 +51,8 @@ void	send_message(int pid, char *str)
 void	sighandler(int sig)
 {
 	(void)sig;
-	ft_putstr("message reseved succasfuly!!\n");
+	write(1, "hello", 6);
+	ft_putstr("message send succasfully!!\n");
 }
 
 int	send(int pid, char *str)
@@ -79,7 +80,7 @@ int	main(int ac, char **av)
 
 	if (ac != 3)
 		return (1);
-	signal(SIGUSR1, sighandler);
+	signal(SIGUSR1, sighandler); // Register signal handler
 	if (ft_atoi(av[1], &pid) == 0)
 	{
 		ft_putstr("invalid argument");

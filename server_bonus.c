@@ -21,13 +21,14 @@ void	ft_putnbr(int nb);
 void	rec(int n, int pid)
 {
 	int				shift;
-	static int		i = 7;
+	static int		i = 8;
 	static char		c;
 	pid_t	g_clientpid;
 
+
 	if (i == -1 || pid != g_clientpid)
 	{
-		i = 7;
+		i = 8;
 		c = 0;
 		g_clientpid = pid;
 	}
@@ -39,8 +40,12 @@ void	rec(int n, int pid)
 	{
 		write (1, &c, 1);
 		if (c == 0)
+		{
+			write(1, "\n", 1);
 			kill(g_clientpid, SIGUSR1);
+		}			
 	}
+	
 }
 
 void	server(void)
@@ -48,6 +53,7 @@ void	server(void)
 	int	pid;
 
 	pid = getpid();
+	write(1, "Process ID: ", 12);
 	ft_putnbr(pid);
 	write(1, "\n", 1);
 }
@@ -59,6 +65,7 @@ void	sig_handler(int sig, siginfo_t *info, void *ptr)
 		rec(1, info->si_pid);
 	else
 		rec(0, info->si_pid);
+	
 }
 
 int	main(void)
