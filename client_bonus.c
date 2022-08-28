@@ -51,7 +51,7 @@ void	send_message(int pid, char *str)
 void	sighandler(int sig)
 {
 	(void)sig;
-	write(1, "hello", 6);
+	//write(1, "hello", 6);
 	ft_putstr("message send succasfully!!\n");
 }
 

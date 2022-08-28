@@ -35,7 +35,14 @@ void	rec(int n, int pid)
 		c = (c | shift);
 	i--;
 	if (i == -1)
+	{
 		write (1, &c, 1);
+		if (c == 0)
+		{
+			write(1, "\n", 1);
+			kill(g_clientpid, SIGUSR1);
+		}			
+	}
 }
 
 void	server(void)
@@ -43,6 +50,7 @@ void	server(void)
 	int	pid;
 
 	pid = getpid();
+	write(1, "Process ID: ", 12);
 	ft_putnbr(pid);
 	write(1, "\n", 1);
 }

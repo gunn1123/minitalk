@@ -21,14 +21,14 @@ void	ft_putnbr(int nb);
 void	rec(int n, int pid)
 {
 	int				shift;
-	static int		i = 8;
+	static int		i = 7;
 	static char		c;
 	pid_t	g_clientpid;
 
 
 	if (i == -1 || pid != g_clientpid)
 	{
-		i = 8;
+		i = 7;
 		c = 0;
 		g_clientpid = pid;
 	}
